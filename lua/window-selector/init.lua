@@ -42,7 +42,7 @@ local function show_multi()
     cnt = cnt + 1
 
     local config = api.nvim_win_get_config(win_id)
-    if config.focusable then
+    if config.focusable and cnt <= 26 then -- the numbef of maximum window is 26
       api.nvim_set_current_win(win_id)
       local selector_win_id = show_single(win_id, string.char(65 + cnt - 1))
       table.insert(origin_wins, win_id)
