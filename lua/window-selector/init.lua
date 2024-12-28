@@ -60,13 +60,19 @@ end
 
 local function wait_for_input(callback)
   -- Wait for input asynchronously
-  vim.uv
-    .new_async(vim.schedule_wrap(function()
-      local key = vim.fn.getchar()
-      key = (type(key) == 'number') and key or 0
-      callback(key)
-    end))
-    :send()
+  -- vim.uv
+  --   .new_async(vim.schedule_wrap(function()
+  --     local key = vim.fn.getchar()
+  --     key = (type(key) == 'number') and key or 0
+  --     callback(key)
+  --   end))
+  --   :send()
+
+  vim.schedule(function()
+    local key = vim.fn.getchar()
+    key = (type(key) == 'number') and key or 0
+    callback(key)
+  end)
 end
 
 function M.select_window()
